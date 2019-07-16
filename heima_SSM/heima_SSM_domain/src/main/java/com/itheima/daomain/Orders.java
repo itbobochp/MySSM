@@ -1,5 +1,7 @@
 package com.itheima.daomain;
 
+import com.itheima.utils.DateUtils;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class Orders {
     private Date orderTime;
     private String orderTimeStr;
     private int orderStatus;
+    private String orderStatusStr;
     private int peopleCount;
     private Product product;
     private List<Traveller> travellers;
@@ -16,6 +19,20 @@ public class Orders {
     private Integer payType;
     private String payTypeStr;
     private String orderDesc;
+
+    public String getOrderStatusStr() {
+        //订单状态(0 未支付 1 已支付)
+        if (orderStatus == 0 ){
+            orderStatusStr = "未支付";
+        }else if (orderStatus == 1){
+            orderStatusStr = "已支付";
+        }
+        return orderStatusStr;
+    }
+
+    public void setOrderStatusStr(String orderStatusStr) {
+        this.orderStatusStr = orderStatusStr;
+    }
 
     public String getId() {
         return id;
@@ -42,6 +59,9 @@ public class Orders {
     }
 
     public String getOrderTimeStr() {
+        if (orderTime != null){
+            orderTimeStr = DateUtils.date2String(orderTime,"yyyy-MM-dd HH:mm:ss");
+        }
         return orderTimeStr;
     }
 
@@ -98,6 +118,17 @@ public class Orders {
     }
 
     public String getPayTypeStr() {
+        //支付方式(0 支付宝 1 微信 2其它)
+        if (payType != null){
+            if (payType == 0){
+                payTypeStr = "支付宝";
+            }else if (payType == 1){
+                payTypeStr = "微信";
+            }else if (payType == 2){
+                payTypeStr = "2其它";
+            }
+        }
+
         return payTypeStr;
     }
 
