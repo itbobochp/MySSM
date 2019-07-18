@@ -28,7 +28,6 @@
                 login-processing-url="/login"
                 default-target-url="/index.jsp"
                 authentication-failure-url="/failer.jsp"
-                authentication-success-forward-url="/pages/main.jsp"
         />
 
         <!-- 关闭跨域请求 -->
@@ -38,6 +37,12 @@
 
     </security:http>
 
+
+
+
+    <security:global-method-security jsr250-annotations="enabled"/>
+    <!--<security:global-method-security secured-annotations="enabled"/>-->
+    <!--<security:global-method-security pre-post-annotations="enabled"/>-->
     <!-- 切换成数据库中的用户名和密码 -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userService">
@@ -49,6 +54,7 @@
     <!-- 配置加密类 -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
     <!-- 提供了入门的方式，在内存中存入用户名和密码
     <security:authentication-manager>
     	<security:authentication-provider>

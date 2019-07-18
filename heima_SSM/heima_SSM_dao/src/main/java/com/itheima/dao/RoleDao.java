@@ -1,6 +1,7 @@
 package com.itheima.dao;
 
 
+import com.itheima.daomain.Permission;
 import com.itheima.daomain.Role;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
@@ -27,4 +28,13 @@ public interface RoleDao {
 
     @Insert("insert into role (roleName,roleDesc) values (#{roleName},#{roleDesc})")
     void save(Role role);
+
+    @Select("select * from role where id = #{id}")
+    Role findRoleById(String id);
+
+    @Select("select * from permission where id not in (select permissionId from role_permission where roleId = #{id})")
+    List<Permission> findAllPernission(String id);
+
+    @Insert("insert into role_permission (permissionId,roleId) values (#{permissionId},#{roleId})")
+    void addPermissionToRole(@Param("roleId") String roleId, @Param("permissionId") String permissionId);
 }

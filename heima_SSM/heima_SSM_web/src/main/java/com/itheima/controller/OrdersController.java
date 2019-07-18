@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.itheima.daomain.Orders;
 import com.itheima.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ public class OrdersController {
     private OrdersService ordersService;
 
     @RequestMapping("/findAll")
+    //@Secured("ROLE_ADMIN")
+    //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public String findAll(Model model,@RequestParam(name = "page", required = true, defaultValue = "1") Integer page,
                           @RequestParam(name = "pageSize", required = true, defaultValue = "4") Integer pageSize){
         List<Orders> orders = ordersService.findAll(page,pageSize);

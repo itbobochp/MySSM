@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
@@ -11,7 +10,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>chp</p>
+				<p><security:authentication property="principal.username" /></p>
 				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
@@ -32,7 +31,9 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li id="system-setting"><a
+					<li id="system-setting">
+
+						<a
 						href="${pageContext.request.contextPath}/user/findAll"> <i
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
@@ -56,11 +57,17 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li id="system-setting"><a
+					<li id="system-setting">
+						<security:authorize access="hasRole('ADMIN')">
+						<a
 						href="${pageContext.request.contextPath}/product/findAll">
 							<i class="fa fa-circle-o"></i> 产品管理
-					</a></li>
-					<li id="system-setting"><a
+					</a>
+						</security:authorize>
+					</li>
+					<li id="system-setting">
+
+						<a
 						href="${pageContext.request.contextPath}/orders/findAll?page=1&pageSize=${pageInfo.pageSize}"> <i
 							class="fa fa-circle-o"></i> 订单管理
 					</a></li>

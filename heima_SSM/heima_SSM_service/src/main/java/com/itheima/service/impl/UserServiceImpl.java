@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -64,5 +65,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo findById(String id) {
         return userDao.findById(id);
+    }
+
+    @Override
+    public List<Role> findAllRole(String id) {
+        return userDao.findAllRole(id);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] ids) {
+        for (String roleId : ids) {
+            userDao.addRoleToUser(userId,roleId);
+        }
     }
 }

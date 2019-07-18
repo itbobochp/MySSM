@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,7 @@ public class ProductController {
 
     //查询所有商品信息
     @RequestMapping("/findAll")
+    @RolesAllowed("ADMIN")
     public String findAll(Model model){
 
         List<Product> productList = productService.findAll();

@@ -1,5 +1,6 @@
 package com.itheima.dao;
 
+import com.itheima.daomain.Role;
 import com.itheima.daomain.UserInfo;
 import org.apache.ibatis.annotations.*;
 
@@ -38,4 +39,11 @@ public interface UserDao {
             @Result(column = "id",property = "roles",many = @Many(select ="com.itheima.dao.RoleDao.findByUserId"))
     })
     UserInfo findById(String id);
+
+    @Select("select * from role where id not in (select roleId from users_role where userId = #{id})")
+    List<Role> findAllRole(String id);
+
+
+    @Insert("insert into users_role (userId,roleId) values (#{userId},#{roleId})")
+    void addRoleToUser(@Param("userId") String userId, @Param("roleId") String roleId);
 }
