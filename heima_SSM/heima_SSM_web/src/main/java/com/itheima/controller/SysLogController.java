@@ -2,9 +2,10 @@ package com.itheima.controller;
 
 import com.itheima.daomain.Syslog;
 
-import com.itheima.service.ISysLogService;
+import com.itheima.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,14 +16,14 @@ import java.util.List;
 public class SysLogController {
 
     @Autowired
-    private ISysLogService sysLogService;
+    private SysLogService sysLogService;
 
-    @RequestMapping("/findAll.do")
-    public ModelAndView findAll() throws Exception {
-        ModelAndView mv=new ModelAndView();
+    @RequestMapping("/findAll")
+    public String  findAll(Model model) throws Exception {
+
        List<Syslog> sysLogList= sysLogService.findAll();
-       mv.addObject("sysLogs",sysLogList);
-       mv.setViewName("syslog-list");
-        return mv;
+       model.addAttribute("sysLogs",sysLogList);
+
+        return "syslog-list";
     }
 }

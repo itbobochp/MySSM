@@ -28,6 +28,7 @@
                 login-processing-url="/login"
                 default-target-url="/index.jsp"
                 authentication-failure-url="/failer.jsp"
+                always-use-default-target="true"
         />
 
         <!-- 关闭跨域请求 -->

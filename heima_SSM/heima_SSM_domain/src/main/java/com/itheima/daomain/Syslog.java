@@ -1,5 +1,7 @@
 package com.itheima.daomain;
 
+import com.itheima.utils.DateUtils;
+
 import java.util.Date;
 
 public class Syslog {
@@ -30,7 +32,8 @@ public class Syslog {
     }
 
     public String getVisitTimeStr() {
-        return visitTimeStr;
+
+        return visitTime.toString();
     }
 
     public void setVisitTimeStr(String visitTimeStr) {
